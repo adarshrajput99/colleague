@@ -29,6 +29,18 @@ def emp_table(emp_id, name, project, grade):
     db.close()
 
 
+def last_emp():
+    i = 0
+    db = sqlite3.connect('oms.db')
+    cursor = db.cursor()
+    cursor.execute("SELECT emp_id FROM employee ORDER BY grade DESC")
+    for employee in cursor:
+        for j in range(len(employee)):
+            if employee[0] > i:
+                i = employee[0]
+    return i
+
+
 # 1
 # Delete employee
 def delete_emp():
@@ -198,6 +210,9 @@ def add_emp():
     emp_grade_fd.insert(0, "0")
     response = Label(root)
     response.place(x=100, y=150)
+    emp_id.insert(END, last_emp()+1)
+    emp_id.config(state='readonly')
+    emp_project_fd.config(state='readonly')
 
     # ok function
     def ok(event=None):
