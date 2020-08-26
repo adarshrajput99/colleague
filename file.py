@@ -15,10 +15,10 @@ def file_get():
 
     def bye():
         try:
-            response.config(cloud.upload(main_win.sourceFile))
+            cloud.upload(main_win.sourceFile)
+            response.config(text="done")
         except Exception as e:
             response.config(text=e)
-
 
     def end():
         exit(0)
@@ -31,7 +31,7 @@ def file_get():
     close.width = 100
     response = tkinter.Label(text= "Select the file and wait for response ")
     response.place(x=120, y=160)
-    x = tkinter.Button(text='X',command = end)
+    x = tkinter.Button(text='X', command=end)
     x.place(x=0, y=0)
 
     def on_closing():
@@ -39,6 +39,7 @@ def file_get():
 
     main_win.protocol("WM_DELETE_WINDOW", on_closing)
     main_win.mainloop()
+    cloud.upload(main_win.sourceFile)
 
 
 if __name__ == "__main__":
