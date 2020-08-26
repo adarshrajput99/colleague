@@ -44,7 +44,11 @@ def details():
     proj_date_fd.place(x=150, y=180)
     proj_status_fd.place(x=150, y=210)
     response = Label(root, text="* DENOTES FILL ONE OF THESE FIELD TO SEARCH")
-    response.place(x=1, y=280)
+    response.place(x=1, y=320)
+    emp_join_date = Label(root, text="Emp join date")
+    emp_join_date.place(x=1, y=240)
+    emp_join_date_fd = Entry(root)
+    emp_join_date_fd.place(x=150, y=240)
 
     def single_proj(emp):
         db = sqlite3.connect('oms.db')
@@ -93,6 +97,7 @@ def details():
             emp_name_fd.insert(END, row[1])
             emp_project_fd.insert(END, row[2])
             emp_grade_fd.insert(END, row[3])
+            emp_join_date_fd.insert(END, row[4])
         db.close()
 
     def get_det_emp_name(name):
@@ -139,7 +144,7 @@ def details():
              proj_Name_fd.get())
 
     b1 = Button(root, text="   SEARCH   ", command=get)
-    b1.place(x=100, y=240)
+    b1.place(x=100, y=280)
     root.bind('<Return>', get)
 
     root.mainloop()

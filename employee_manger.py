@@ -1,5 +1,6 @@
 from tkinter import *
 import sqlite3
+from datetime import date
 
 
 # delete entry employee table
@@ -20,11 +21,13 @@ def update(emp_id, name, project, grade):
 
 
 def emp_table(emp_id, name, project, grade):
+    join_date = date.today()
     emp_id = int(emp_id)
     project = int(project)
     grade = int(grade)
     db = sqlite3.connect('oms.db')
-    db.execute("INSERT INTO employee(emp_id,name,project,grade) VALUES(?,?,?,?)", (emp_id, name, project, grade))
+    db.execute("INSERT INTO employee(emp_id,name,project,grade,join_date) VALUES(?,?,?,?,?)",
+               (emp_id, name, project, grade, join_date))
     db.commit()
     db.close()
 
@@ -151,7 +154,7 @@ def emp_p():
 # Show employee
 def show_emp():
     root = Tk()
-    root.geometry("347x310")
+    root.geometry("430x400")
     root.title("emp info")
 
     db = sqlite3.connect("oms.db")
@@ -165,11 +168,14 @@ def show_emp():
     h = Entry(root, width=10, fg='white', bg='black')
     h.grid(row=0, column=2)
     k = Entry(root, width=10, fg='white', bg='black')
+    l = Entry(root, width=10, fg='white', bg='black')
+    l.grid(row=0, column=4)
     k.grid(row=0, column=3)
     f.insert(END, "EMP-ID")
     g.insert(END, "Name")
     h.insert(END, "Projects")
     k.insert(END, "Grade")
+    l.insert(END, "Join_Date")
     for employee in cursor:
         for j in range(len(employee)):
             e = Entry(root, width=10, fg='blue')
@@ -210,7 +216,7 @@ def add_emp():
     emp_grade_fd.insert(0, "0")
     response = Label(root)
     response.place(x=100, y=150)
-    emp_id.insert(END, last_emp()+1)
+    emp_id.insert(END, last_emp() + 1)
     emp_id.config(state='readonly')
     emp_project_fd.config(state='readonly')
 

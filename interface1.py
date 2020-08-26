@@ -3,6 +3,7 @@ from interface2 import *
 
 def login():
     root = Tk()
+
 # OK FUNCTION DEFINITION WHICH IS USED IN LAYOUT
     def ok(event=None):
         if user_val.get() == "asr":
@@ -17,7 +18,7 @@ def login():
 
     root.title("OMS GOD ACCESS")
     root.geometry("250x150")
-    root.bind('<Return>',ok)
+    root.bind('<Return>', ok)
 
     # LABELS
     user = Label(root, text="user    ")

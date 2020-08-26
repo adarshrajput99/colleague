@@ -1,6 +1,8 @@
 from project_manager import *
 from details import details
 from employee_manger import *
+import file
+import cloud
 
 
 def interface2():
@@ -39,8 +41,15 @@ def interface2():
     assign.pack(anchor="w")
     emp_grade = Button(root, text="       Employee Ranking\t", anchor="w", command=show_emp)
     emp_grade.pack()
-    search = Button(root, text="                SEARCH       \t", anchor="w", command = serch)
+    search = Button(root, text="                SEARCH       \t", anchor="w", command=serch)
     search.pack()
+
+    def upload_i():
+        root.destroy()
+        file.file_get()
+
+    cloud_b = Button(root, text="\t  UPLOAD\t\t", command=upload_i)
+    cloud_b.pack()
     close = Button(root, text="close", command=out)
     close.pack()
     root.mainloop()
@@ -52,4 +61,3 @@ def out():
 
 if __name__ == "__main__":
     interface2()
-
