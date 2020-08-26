@@ -16,7 +16,7 @@ def login():
         else:
             response.config(text="access denied!!!")
 
-    root.title("OMS GOD ACCESS")
+    root.title("SIGN IN")
     root.geometry("250x150")
     root.bind('<Return>', ok)
 

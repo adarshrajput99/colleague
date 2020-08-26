@@ -1,9 +1,11 @@
 from tkinter import *
 from interface1 import login
-
+           
 root = Tk()
-root.geometry("400x555")
-root.title("OFFICE MANAGEMENT SYSTEM")
+root.geometry("300x300")
+root.maxsize(300,300)
+root.minsize(300,300)
+root.title("COLLEAGUE")
 
 
 def click(event=None):
