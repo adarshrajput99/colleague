@@ -34,7 +34,7 @@ def emp_table(emp_id, name, project, grade):
 
 def last_emp():
     i = 0
-    db = sqlite3.connect('oms.db')
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
     cursor = db.cursor()
     cursor.execute("SELECT emp_id FROM employee ORDER BY grade DESC")
     for employee in cursor:
@@ -137,7 +137,7 @@ def emp_p():
     root.bind('<Return>', get)
 
     def single_emp(emp):
-        db = sqlite3.connect('oms.db')
+        db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
         cursor = db.cursor()
         cursor.execute("SELECT * FROM employee WHERE emp_id=?", (emp,))
         records = cursor.fetchall()
@@ -157,7 +157,7 @@ def show_emp():
     root.geometry("430x400")
     root.title("emp info")
 
-    db = sqlite3.connect("oms.db")
+    db = sqlite3.connect("/home/adarshsingh/PycharmProjects/oms/admin/oms.db")
     cursor = db.cursor()
     cursor.execute("SELECT * FROM employee ORDER BY grade DESC")
     i = 0

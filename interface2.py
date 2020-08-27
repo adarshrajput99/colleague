@@ -1,8 +1,7 @@
-from project_manager import *
-from details import details
-from employee_manger import *
-import file
-import cloud
+from admin.project_manager import *
+from admin.details import details
+from admin.employee_manger import *
+from admin import file
 
 
 def interface2():

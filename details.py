@@ -1,4 +1,4 @@
-import project_manager
+from admin import project_manager
 import sqlite3
 from tkinter import *
 

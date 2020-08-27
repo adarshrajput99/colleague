@@ -5,7 +5,7 @@ import sqlite3
 # ADDING PROJECT
 
 def update_project(project, emp_id):
-    db = sqlite3.connect('oms.db')
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
     db.execute("UPDATE employee SET project=? WHERE emp_id=?",
                (project + 1, emp_id))
     db.commit()
@@ -13,7 +13,7 @@ def update_project(project, emp_id):
 
 
 def get_proj(emp_id):
-    db = sqlite3.connect('oms.db')
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
     cursor = db.cursor()
     cursor.execute("SELECT * FROM employee WHERE emp_id=?", (emp_id,))
     records = cursor.fetchall()
@@ -24,7 +24,7 @@ def get_proj(emp_id):
 
 # *****************************( SEARCH SECTION )*************************************************** #
 def search(emp_id):
-    db = sqlite3.connect('oms.db')
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
     cursor = db.cursor()
     cursor.execute("SELECT * FROM employee Where emp_id=?", (emp_id,))
     for row in cursor.fetchall():
@@ -34,7 +34,7 @@ def search(emp_id):
 
 
 def search_name(name):
-    db = sqlite3.connect('oms.db')
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
     cursor = db.cursor()
     cursor.execute("SELECT * FROM employee Where name=?", (name,))
     for row in cursor.fetchall():
@@ -44,7 +44,7 @@ def search_name(name):
 
 
 def search_proj(proj_id):
-    db = sqlite3.connect('oms.db')
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
     cursor = db.cursor()
     cursor.execute("SELECT * FROM project Where proj_id=?", (proj_id,))
     for row in cursor.fetchall():
@@ -54,7 +54,7 @@ def search_proj(proj_id):
 
 
 def search_proj_name(name):
-    db = sqlite3.connect('oms.db')
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
     cursor = db.cursor()
     cursor.execute("SELECT * FROM project Where proj_name=?", (name,))
     for row in cursor.fetchall():
@@ -67,7 +67,7 @@ def search_proj_name(name):
 # Entry of proj
 def proj_table(proj_id, proj_name, assign=None, date=None):
     if assign is not None:
-        db = sqlite3.connect('oms.db')
+        db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
         cursor = db.cursor()
         x = None
         cursor.execute("SELECT * FROM employee WHERE emp_id=?", (assign,))
@@ -94,7 +94,7 @@ def proj_list():
     root.geometry("430x310")
     root.title("emp info")
 
-    db = sqlite3.connect("oms.db")
+    db = sqlite3.connect("/home/adarshsingh/PycharmProjects/oms/admin/oms.db")
     cursor = db.cursor()
     cursor.execute("SELECT * FROM project ORDER BY proj_id ASC")
     i = 0

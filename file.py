@@ -1,6 +1,6 @@
 import tkinter
 from tkinter import filedialog
-import cloud
+from admin import cloud
 
 
 def file_get():

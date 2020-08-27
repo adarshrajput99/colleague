@@ -1,4 +1,8 @@
-from interface2 import *
+from admin.interface2 import *
+from employee import users_start
+from admin import project_manager
+from employee import emp_func_batch
+call_id = 0
 
 
 def login():
@@ -14,7 +18,13 @@ def login():
             else:
                 response.config(text="access denied!!!")
         else:
-            response.config(text="access denied!!!")
+            if project_manager.search(int(user_val.get())):
+                call_id = int(user_val.get())
+                if pass_val.get() == emp_func_batch.get_date(call_id):
+                    root.destroy()
+                    users_start.usr_start(call_id)
+            else:
+                response.config(text="access denied!!!")
 
     root.title("SIGN IN")
     root.geometry("250x150")
