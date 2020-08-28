@@ -2,7 +2,7 @@ import dropbox
 
 try:
     dbx = dropbox.Dropbox('eM8QnMm92mUAAAAAAAAAAd7WgRgIsLb2tDIoCi4k9dbhejOSuobCUEC8m3k_AiAz')
-    print("connected")
+
 except Exception as e:
     print(e)
 

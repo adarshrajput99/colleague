@@ -3,7 +3,6 @@ import sqlite3
 
 
 # ADDING PROJECT
-
 def update_project(project, emp_id):
     db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
     db.execute("UPDATE employee SET project=? WHERE emp_id=?",
@@ -20,6 +19,19 @@ def get_proj(emp_id):
     for row in records:
         return row[2]
     db.close()
+
+
+def p_id_get():
+    i = 0
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
+    cursor = db.cursor()
+    cursor.execute("SELECT proj_id FROM project ")
+    for project in cursor:
+        for j in range(len(project)):
+            if project[0] > i:
+                i = project[0]
+    i = str(i + 1)
+    return i
 
 
 # *****************************( SEARCH SECTION )*************************************************** #
@@ -61,6 +73,8 @@ def search_proj_name(name):
         return True
     else:
         return False
+
+
 # *****************************************( SEARCH END )*************************************** #
 
 
@@ -76,8 +90,8 @@ def proj_table(proj_id, proj_name, assign=None, date=None):
 
         if x is not None:
             if assign is not None or date is not None:
-                db.execute("INSERT INTO project(proj_id, proj_name, assign,due ) VALUES(?,?,?,?)",
-                           (proj_id, proj_name, assign, date))
+                db.execute("INSERT INTO project(proj_id, proj_name, assign,due ,Status) VALUES(?,?,?,?,?)",
+                           (proj_id, proj_name, assign, date, 'Not Done'))
                 db.commit()
                 db.close()
                 return 1
@@ -151,8 +165,10 @@ def add_proj():
     proj_date_fd.place(x=150, y=90)
     proj_assign_fd.insert(0, "None")
     proj_date_fd.insert(0, "00-00-00")
-    response = Label(root)
+    response = Label(root, text="response")
     response.place(x=100, y=150)
+    proj_id.insert(END, p_id_get())
+    proj_id.config(state='readonly')
 
     def out():
         root.destroy()
@@ -164,17 +180,18 @@ def add_proj():
                 update_project(get_proj(int(proj_assign_fd.get())), int(proj_assign_fd.get()))
                 proj_table(int(proj_id.get()), proj_name_fd.get(), int(proj_assign_fd.get()),
                            proj_date_fd.get())
-                response.config(text="Entry Successful")
-            except:
-                response.config(text="Entry failed!!!!!")
+                response.config(text="Successfully Done")
+            except Exception as error:
+                response.config(text=error)
         else:
             response.config(text="emp_id not Available")
         root.destroy()
-        add_proj()
 
     root.bind('<Return>', ok)
     b1 = Button(root, text="ok", command=ok)
     b1.place(x=100, y=120)
     b2 = Button(root, text="Close", command=out)
     b2.place(x=200, y=120)
+    add = Button(text="+", command=add_proj)
+    add.place(x=280, y=120)
     root.mainloop()

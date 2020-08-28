@@ -73,3 +73,10 @@ def get_salary_end(emp_id):
     for row in records:
         return row[2]
     db.close()
+
+
+def date_time_get():
+    from datetime import datetime
+    now = datetime.now()  # current date and time
+    date_time = now.strftime("%d/%m/%Y, %H:%M:%S")
+    return date_time

@@ -51,7 +51,7 @@ def details():
     emp_join_date_fd.place(x=150, y=240)
 
     def single_proj(emp):
-        db = sqlite3.connect('oms.db')
+        db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
         cursor = db.cursor()
         cursor.execute("SELECT * FROM project WHERE assign=?", (emp,))
         records = cursor.fetchall()
@@ -63,7 +63,7 @@ def details():
         db.close()
 
     def single_proj_id(proj_id):
-        db = sqlite3.connect('oms.db')
+        db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
         cursor = db.cursor()
         cursor.execute("SELECT * FROM project WHERE proj_id=?", (proj_id,))
         records = cursor.fetchall()
@@ -76,7 +76,7 @@ def details():
         db.close()
 
     def single_proj_name(name):
-        db = sqlite3.connect('oms.db')
+        db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
         cursor = db.cursor()
         cursor.execute("SELECT * FROM project WHERE proj_name=?", (name,))
         records = cursor.fetchall()
@@ -89,7 +89,7 @@ def details():
         db.close()
 
     def single_emp(emp):
-        db = sqlite3.connect('oms.db')
+        db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
         cursor = db.cursor()
         cursor.execute("SELECT * FROM employee WHERE emp_id=?", (emp,))
         records = cursor.fetchall()
@@ -101,7 +101,7 @@ def details():
         db.close()
 
     def get_det_emp_name(name):
-        db = sqlite3.connect('oms.db')
+        db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
         cursor = db.cursor()
         cursor.execute("SELECT * FROM employee WHERE name=?", (name,))
         records = cursor.fetchall()

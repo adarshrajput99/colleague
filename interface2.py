@@ -17,6 +17,11 @@ def interface2():
     def emp_perform():
         emp_p()
 
+    def proj_add():
+        root.destroy()
+        add_proj()
+
+
     def serch():
         details()
 
@@ -36,7 +41,7 @@ def interface2():
     add.pack(anchor="w")
     remove = Button(root, text="      Remove  Employee      ", command=del_emp)
     remove.pack(anchor="w")
-    assign = Button(root, text="               Add Project  \t", command=add_proj)
+    assign = Button(root, text="               Add Project  \t", command=proj_add)
     assign.pack(anchor="w")
     emp_grade = Button(root, text="       Employee Ranking\t", anchor="w", command=show_emp)
     emp_grade.pack()

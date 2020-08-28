@@ -23,8 +23,8 @@ def file_get():
     def end():
         exit(0)
 
-    b_chooseFile = tkinter.Button(main_win, text="Chose File", width=20, height=3, command=chooseFile)
-    close = tkinter.Button(text="UPLOAD", command =bye)
+    b_chooseFile = tkinter.Button(main_win, text="Choose File", width=20, height=3, command=chooseFile,font=('Helvetica', 11, 'bold'))
+    close = tkinter.Button(text="UPLOAD", command=bye)
     b_chooseFile.place(x=150, y=50)
     b_chooseFile.width = 100
     close.place(x=200, y=120)

@@ -5,7 +5,7 @@ from datetime import date
 
 # delete entry employee table
 def delete(a):
-    db = sqlite3.connect('oms.db')
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
     cursor = db.cursor()
     cursor.execute("DELETE FROM employee WHERE emp_id=?", (a,))
     db.commit()
@@ -13,7 +13,7 @@ def delete(a):
 
 
 def update(emp_id, name, project, grade):
-    db = sqlite3.connect('oms.db')
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
     db.execute("UPDATE employee SET emp_id=?,name=?,project=?,grade=? WHERE emp_id=?",
                (emp_id, name, project, grade, emp_id))
     db.commit()
@@ -25,7 +25,7 @@ def emp_table(emp_id, name, project, grade):
     emp_id = int(emp_id)
     project = int(project)
     grade = int(grade)
-    db = sqlite3.connect('oms.db')
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
     db.execute("INSERT INTO employee(emp_id,name,project,grade,join_date) VALUES(?,?,?,?,?)",
                (emp_id, name, project, grade, join_date))
     db.commit()
