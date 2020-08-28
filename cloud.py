@@ -1,7 +1,7 @@
 import dropbox
 
 try:
-    dbx = dropbox.Dropbox('eM8QnMm92mUAAAAAAAAAAd7WgRgIsLb2tDIoCi4k9dbhejOSuobCUEC8m3k_AiAz')
+    dbx = dropbox.Dropbox('DROPBOX API TOKEN')
 
 except Exception as e:
     print(e)
