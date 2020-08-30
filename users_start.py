@@ -2,6 +2,7 @@ from tkinter import *
 from employee import emp_func_batch
 from admin import file
 import time
+from employee import download_call
 
 
 def usr_start(emp_id):
@@ -14,7 +15,10 @@ def usr_start(emp_id):
         file.file_get()
 
     def file_get_download():
-        pass
+        root.destroy()
+        download_call.download_req(emp_id)
+
+    photo = PhotoImage(file="/home/adarshsingh/PycharmProjects/oms/employee/icons8-export-20.png")
 
     user_id_lb = Label(text="User_id :")
     user_id = Entry(root)
@@ -24,6 +28,7 @@ def usr_start(emp_id):
     user_join = Entry(root)
     grade_lb = Label(text="Grade :")
     grade = Entry(root)
+    colleague=Label()
     sal_lb = Label(text="Your salary will be in range: ", font=('Helvetica', 18, 'bold'))
     start_lb = Label(text="Start from  :")
     end_lb = Label(text="Upto           :")
@@ -36,6 +41,7 @@ def usr_start(emp_id):
     download = Button(text="DOWNLOAD FILES", width=20, height=3, command=file_get_download, font=('Helvetica', 11, 'bold'), bg='black',fg='white')
     date = Label(text='')
     note = Label(text="Always check before uploading",font=('Helvetica', 10, 'bold'))
+    Logout =Button(image=photo, command=exit)
 
     def clock():
         t = time.strftime('%d/%m/%Y, %H:%M:%S', time.localtime())
@@ -65,6 +71,7 @@ def usr_start(emp_id):
     feedback.place(width=300, height=200)
     feedback_lb.place(x=0, y=125)
     note.place(x=490,y=140)
+    Logout.place(x=975,y=375)
 
     user_id.insert(END, emp_id)
     user_name.insert(END, (emp_func_batch.get_name(int(emp_id))))

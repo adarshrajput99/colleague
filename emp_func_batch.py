@@ -1,5 +1,6 @@
 import sqlite3
-
+import dropbox
+import tkinter
 
 def grade_conv(temp):
     grade = 0
@@ -80,3 +81,40 @@ def date_time_get():
     now = datetime.now()  # current date and time
     date_time = now.strftime("%d/%m/%Y, %H:%M:%S")
     return date_time
+
+
+def search():
+    x=[]
+    dbx = dropbox.Dropbox('eM8QnMm92mUAAAAAAAAAAd7WgRgIsLb2tDIoCi4k9dbhejOSuobCUEC8m3k_AiAz')
+    result = dbx.files_list_folder("", recursive=True)
+    file_list = []
+
+    def process_entries(entries):
+        for entry in entries:
+            file_list.append([entry.name])
+
+    process_entries(result.entries)
+    while result.has_more:
+        result = dbx.files_list_folder_continue(result.cursor)
+
+        process_entries(result.entries)
+    check = False
+
+    for i in file_list:
+        for y in i:
+            x.append(y)
+
+    return x
+
+
+def available_files():
+    root = tkinter.Tk()
+    root.geometry("400x500")
+    root.title("File Download")
+    list= search()
+    for i in range(len(list)):
+        e = tkinter.Entry(root, width=50, fg='blue')
+        e.grid(row=i, column=0)
+        e.insert(tkinter.END, list[i])
+    root.mainloop()
+
