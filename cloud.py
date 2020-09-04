@@ -1,7 +1,8 @@
 import dropbox
+import os
 
 try:
-    dbx = dropbox.Dropbox('DROPBOX API TOKEN')
+    dbx = dropbox.Dropbox('eM8QnMm92mUAAAAAAAAAAd7WgRgIsLb2tDIoCi4k9dbhejOSuobCUEC8m3k_AiAz')
 
 except Exception as e:
     print(e)
@@ -33,15 +34,19 @@ def search(file_name):
     for i in file_list:
         for y in i:
             if x == y:
-                print("found")
-                check = True
-                break
-        if check:
-            break
+                return True
     else:
-        print("not found")
+        return False
 
 
 # download
 def download(file):
-    print(dbx.files_download(path="/home/adarshsingh/" + file))
+    print(dbx.files_download_to_file(os.path.expanduser("~") + "/Downloads/" + file, path="/home/adarshsingh/" + file,
+                                     rev=None))
+    print("done")
+
+
+
+
+
+

@@ -1,9 +1,12 @@
 import tkinter
 from tkinter import filedialog
 from admin import cloud
+from admin.employee_manger import write
+import time
 
 
-def file_get():
+def file_get(emp_id):
+    t = time.strftime('%d/%m/%Y, %H:%M:%S', time.localtime())
     main_win = tkinter.Tk()
     main_win.geometry("500x200")
     main_win.title("SELECT FILE")
@@ -15,6 +18,7 @@ def file_get():
 
     def bye():
         try:
+            write("#{/*UPLOAD*/" + t + "->" + main_win.sourceFile + "}", emp_id)
             cloud.upload(main_win.sourceFile)
             response.config(text="done")
         except Exception as e:
@@ -43,5 +47,5 @@ def file_get():
 
 
 if __name__ == "__main__":
-    file_get()
+    file_get(1211)
 

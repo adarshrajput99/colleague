@@ -12,7 +12,7 @@ def usr_start(emp_id):
 
     def file_get_upload():
         root.destroy()
-        file.file_get()
+        file.file_get(emp_id)
 
     def file_get_download():
         root.destroy()
@@ -28,7 +28,7 @@ def usr_start(emp_id):
     user_join = Entry(root)
     grade_lb = Label(text="Grade :")
     grade = Entry(root)
-    colleague=Label()
+
     sal_lb = Label(text="Your salary will be in range: ", font=('Helvetica', 18, 'bold'))
     start_lb = Label(text="Start from  :")
     end_lb = Label(text="Upto           :")

@@ -44,7 +44,7 @@ def details():
     proj_date_fd.place(x=150, y=180)
     proj_status_fd.place(x=150, y=210)
     response = Label(root, text="* DENOTES FILL ONE OF THESE FIELD TO SEARCH")
-    response.place(x=1, y=320)
+    response.place(x=1, y=350)
     emp_join_date = Label(root, text="Emp join date")
     emp_join_date.place(x=1, y=240)
     emp_join_date_fd = Entry(root)
@@ -144,7 +144,7 @@ def details():
              proj_Name_fd.get())
 
     b1 = Button(root, text="   SEARCH   ", command=get)
-    b1.place(x=100, y=280)
+    b1.place(x=100, y=310)
     root.bind('<Return>', get)
 
     root.mainloop()

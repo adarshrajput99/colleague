@@ -26,7 +26,7 @@ def emp_table(emp_id, name, project, grade):
     project = int(project)
     grade = int(grade)
     db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
-    db.execute("INSERT INTO employee(emp_id,name,project,grade,join_date) VALUES(?,?,?,?,?)",
+    db.execute("INSERT INTO employee(emp_id,name,project,grade,join_date,commit_length) VALUES(?,?,?,?,?,0)",
                (emp_id, name, project, grade, join_date))
     db.commit()
     db.close()
@@ -41,7 +41,46 @@ def last_emp():
         for j in range(len(employee)):
             if employee[0] > i:
                 i = employee[0]
+    db.close()
     return i
+
+
+def get_download(emp_id):
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
+    cursor = db.cursor()
+    cursor.execute("SELECT commits FROM employee WHERE emp_id=?", (emp_id,))
+    for employee in cursor:
+        db.close()
+        return employee[0]
+
+
+def get_no(emp_id):
+    emp_id = str(emp_id)
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
+    cursor = db.cursor()
+    cursor.execute("SELECT commit_length FROM employee WHERE emp_id=?", (emp_id,))
+    for employee in cursor:
+        db.close()
+        return employee[0]
+
+
+def write(text, emp_id):
+    x = get_download(emp_id) + text
+    db = sqlite3.connect('/home/adarshsingh/PycharmProjects/oms/admin/oms.db')
+    db.execute("UPDATE employee SET commits=?,commit_length=commit_length+1 WHERE emp_id=?",
+               (x, emp_id))
+    db.commit()
+    db.close()
+
+
+def commit_conversion(emp_id):
+    x = get_download(emp_id)
+    y = ""
+    for i in range(len(x)):
+        if x[i] == "#":
+            y = y + "\n"
+        y = y + x[i]
+    return y
 
 
 # 1
@@ -154,7 +193,7 @@ def emp_p():
 # Show employee
 def show_emp():
     root = Tk()
-    root.geometry("430x400")
+    root.geometry("602x400")
     root.title("emp info")
 
     db = sqlite3.connect("/home/adarshsingh/PycharmProjects/oms/admin/oms.db")
@@ -169,8 +208,14 @@ def show_emp():
     h.grid(row=0, column=2)
     k = Entry(root, width=10, fg='white', bg='black')
     l = Entry(root, width=10, fg='white', bg='black')
+    m = Entry(root, width=10, fg='white', bg='black')
+    n = Entry(root, width=10, fg='white', bg='black')
     l.grid(row=0, column=4)
     k.grid(row=0, column=3)
+    m.grid(row=0, column=5)
+    n.grid(row=0, column=6)
+    m.insert(END, "Download")
+    n.insert(END, "Download_no")
     f.insert(END, "EMP-ID")
     g.insert(END, "Name")
     h.insert(END, "Projects")
@@ -237,3 +282,31 @@ def add_emp():
     b2.place(x=200, y=120)
 
     root.mainloop()
+
+
+# 5 commit list
+def commit_get():
+    root = Tk()
+    root.geometry("600x600")
+    root.title("EMPLOYEE UPDATES")
+    no_lb = Label(text="NUMBER OF COMMITS :")
+    no_lb.place(x=0, y=6)
+    no = Entry(root)
+    no.place(width=35)
+    emp_id = Label(text="EMP_ID:")
+    emp_id.place(x=200, y=6)
+    emp_id_fd = Entry(root)
+    emp_id_fd.place(x=260, y=5)
+    commits = Label(text="COMMITS:-", anchor="center")
+    commits.place(x=0, y=30)
+    no.place(x=165, y=5)
+
+    def get():
+        commits_fd = Label(text=commit_conversion(emp_id_fd.get()))
+        commits_fd.place(x=0, y=60)
+        no.insert(END, str(get_no(emp_id_fd.get())))
+
+    get_b = Button(text="GET", command=get, width=10)
+    get_b.place(x=430, y=0)
+    root.mainloop()
+
